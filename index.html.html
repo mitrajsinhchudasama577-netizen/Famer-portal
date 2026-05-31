@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌾 ખેડૂત પોર્ટલ - Complete</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #87CEEB 0%, #d4af37 40%, #8B7355 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 5px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            background: white;
+            color: #2ecc71;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.95em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn.active {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .content-section {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            color: #2ecc71;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #2ecc71;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2ecc71;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+        }
+
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f6f9fc 0%, #e9f2f9 100%);
+            border: 2px solid #2ecc71;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .card h3 {
+            color: #2ecc71;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .info {
+            margin: 5px 0;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #2ecc71;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-top: 8px;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+            margin-top: 8px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .news-item {
+            background: #f8f9fa;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+        }
+
+        .news-title {
+            color: #2c3e50;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+
+        .price-table th {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .price-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .price-table tr:hover {
+            background: #f1f8f4;
+        }
+
+        .weather-box {
+            background: linear-gradient(135deg, #56CCF2 0%, #2F80ED 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .scheme-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .scheme-card h4 {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* LOGIN STYLES */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #87CEEB 0%, #d4af37 40%, #8B7355 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-size: 2.5em;
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .login-form {
+            margin-bottom: 20px;
+        }
+
+        .login-group {
+            margin-bottom: 15px;
+        }
+
+        .login-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .login-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .login-group input:focus {
+            outline: none;
+            border-color: #2ecc71;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .error-msg {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        .signup-link a {
+            color: #2ecc71;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>🌾 ખેડૂત પોર્ટલ</h1>
+                <p>ખેડૂત અને મજુરો માટે સોલ્યુશન</p>
+            </div>
+
+            <div id="loginError" class="error-msg"></div>
+            <div id="signupSuccess" class="success-msg"></div>
+
+            <!-- Login Form -->
+            <div id="loginForm">
+                <h2 style="color: #2ecc71; text-align: center; margin-bottom: 20px;">🔐 Login</h2>
+                <form id="userLogin" class="login-form">
+                    <div class="login-group">
+                        <label>Username:</label>
+                        <input type="text" id="loginUsername" placeholder="તમારું Username" required>
+                    </div>
+                    <div class="login-group">
+                        <label>Password:</label>
+                        <input type="password" id="loginPassword" placeholder="તમારું Password" required>
+                    </div>
+                    <button type="submit" class="login-btn">🔓 Login</button>
+                </form>
+
+                <div class="signup-link">
+                    નવો user છો? 
+                    <a onclick="toggleSignup()">અહીં Register કરો</a>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signupForm" style="display: none;">
+                <h2 style="color: #2ecc71; text-align: center; margin-bottom: 20px;">✍️ નવો Account બનાવો</h2>
+                <form id="userSignup" class="login-form">
+                    <div class="login-group">
+                        <label>Username:</label>
+                        <input type="text" id="signupUsername" placeholder="Username બનાવો" required>
+                    </div>
+                    <div class="login-group">
+                        <label>Password:</label>
+                        <input type="password" id="signupPassword" placeholder="Password બનાવો" required>
+                    </div>
+                    <div class="login-group">
+                        <label>Password Confirm:</label>
+                        <input type="password" id="confirmPassword" placeholder="Password ફરી લખો" required>
+                    </div>
+                    <button type="submit" class="login-btn">✅ Register</button>
+                </form>
+
+                <div class="signup-link">
+                    પહલેથી Account છે? 
+                    <a onclick="toggleSignup()">અહીં Login કરો</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+
+    <!-- MAIN WEBSITE -->
+    <div id="mainContent">
+        <header>
+            <h1>🌾 ખેડૂત પોર્ટલ Gujarat</h1>
+            <p>ખેડૂત અને મજુરો માટે સંપૂર્ણ સોલ્યુશન</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="showSection('weather')">🌦️ હવામાન</button>
+            <button class="nav-btn" onclick="showSection('schemes')">🏛️ યોજના</button>
+            <button class="nav-btn" onclick="showSection('budget')">💰 બજટ</button>
+            <button class="nav-btn" onclick="showSection('contact')">🤝 સંપર્ક</button>
+            <button class="nav-btn" onclick="showSection('market')">🛒 માર્કેટ</button>
+            <button class="nav-btn" onclick="showSection('news')">📰 સમાચાર</button>
+            <button class="nav-btn" onclick="showSection('shops')">🏪 દુકાન</button>
+            <button class="nav-btn" onclick="showSection('prices')">💵 ભાવ</button>
+        </div>
+
+        <!-- 1. WEATHER SECTION -->
+        <div id="weather" class="content-section active">
+            <h2 class="section-title">🌦️ લાઇવ હવામાન અને મોન્સુન</h2>
+            
+            <!-- MONSOON TRACKER -->
+            <div style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px;">
+                <h3 style="font-size: 1.5em; margin-bottom: 15px;">🌧️ લાઇવ મોન્સુન ટ્રેકર 2026</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 0.9em; opacity: 0.9;">કુલ વરસાદ (2026)</div>
+                        <div style="font-size: 2em; font-weight: bold; margin: 10px 0;">847 mm</div>
+                        <div style="font-size: 0.9em;">Normal: 734 mm</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 0.9em; opacity: 0.9;">પ્રગતિ</div>
+                        <div style="font-size: 2em; font-weight: bold; margin: 10px 0;">73%</div>
+                        <div style="font-size: 0.9em;">Jun-Sep માર્જિન</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 0.9em; opacity: 0.9;">આજનો વરસાદ</div>
+                        <div style="font-size: 2em; font-weight: bold; margin: 10px 0;">64 mm</div>
+                        <div style="font-size: 0.9em;">આજ સુધી</div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div style="background: rgba(255,255,255,0.2); padding: 3px; border-radius: 10px; overflow: hidden; margin-bottom: 15px;">
+                    <div style="background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%); width: 73%; padding: 8px; text-align: center; color: white; font-weight: bold;">73% ✓</div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.15); padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                    <strong>📊 Status:</strong> વરસાદ Normal થી 23% વધુ છે ✓
+                </div>
+            </div>
+
+            <!-- WEATHER BY LOCATION -->
+            <div style="background: linear-gradient(135deg, #56CCF2 0%, #2F80ED 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                <h3 style="margin-bottom: 15px;">📍 તમારું સ્થળ પસંદ કરો</h3>
+                <select id="weatherLocation" onchange="updateWeather()" style="color: #333; margin-bottom: 15px; padding: 10px; border-radius: 8px; width: 100%; border: none;">
+                    <option value="surat">સુરત</option>
+                    <option value="ahmedabad">અમદાવાદ</option>
+                    <option value="rajkot">રાજકોટ</option>
+                    <option value="vadodara">વડોદરા</option>
+                    <option value="bhavnagar">ભાવનગર</option>
+                    <option value="jamnagar">જામનગર</option>
+                    <option value="anand">આણંદ</option>
+                </select>
+                <div style="font-size: 3em; font-weight: bold; margin-bottom: 10px;" id="tempDisplay">32°C</div>
+                <div style="font-size: 1.1em;">
+                    <div id="weatherDesc">☁️ વાદળછાયું</div>
+                    <div style="margin-top: 10px;">
+                        <span id="humidityDisplay">💧 ભેજ: 68%</span> | 
+                        <span id="windDisplay">💨 પવન: 15 km/h</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MONSOON FORECAST -->
+            <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #3498db;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">📅 આવતા 7 દિવસનો વરસાદ આગાહી</h3>
+                <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px;">
+                    <div style="background: #ecf0f1; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #2c3e50; margin-bottom: 8px;">સોમ</div>
+                        <div style="font-size: 1.5em;">☁️</div>
+                        <div style="color: #3498db; font-weight: bold; margin: 8px 0;">24mm</div>
+                        <div style="color: #666; font-size: 0.9em;">65%</div>
+                    </div>
+                    <div style="background: #ecf0f1; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #2c3e50; margin-bottom: 8px;">મંગળ</div>
+                        <div style="font-size: 1.5em;">🌧️</div>
+                        <div style="color: #3498db; font-weight: bold; margin: 8px 0;">42mm</div>
+                        <div style="color: #666; font-size: 0.9em;">85%</div>
+                    </div>
+                    <div style="background: #ecf0f1; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #2c3e50; margin-bottom: 8px;">બુધ</div>
+                        <div style="font-size: 1.5em;">⛈️</div>
+                        <div style="color: #3498db; font-weight: bold; margin: 8px 0;">58mm</div>
+                        <div style="color: #666; font-size: 0.9em;">95%</div>
+                    </div>
+                    <div style="background: #ecf0f1; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #2c3e50; margin-bottom: 8px;">ગુરુ</div>
+                        <div style="font-size: 1.5em;">🌧️</div>
+                        <div style="color: #3498db; font-weight: bold; margin: 8px 0;">35mm</div>
+                        <div style="color: #666; font-size: 0.9em;">75%</div>
+                    </div>
+                    <div style="background: #ecf0f1; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #2c3e50; margin-bottom: 8px;">શુક્ર</div>
+                        <div style="font-size: 1.5em;">☁️</div>
+                        <div style="color: #3498db; font-weight: bold; margin: 8px 0;">18mm</div>
+                        <div style="color: #666; font-size: 0.9em;">45%</div>
+                    </div>
+                    <div style="background: #ecf0f1; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #2c3e50; margin-bottom: 8px;">શનિ</div>
+                        <div style="font-size: 1.5em;">☀️</div>
+                        <div style="color: #3498db; font-weight: bold; margin: 8px 0;">8mm</div>
+                        <div style="color: #666; font-size: 0.9em;">25%</div>
+                    </div>
+                    <div style="background: #ecf0f1; padding: 12px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #2c3e50; margin-bottom: 8px;">રવિ</div>
+                        <div style="font-size: 1.5em;">☀️</div>
+                        <div style="color: #3498db; font-weight: bold; margin: 8px 0;">0mm</div>
+                        <div style="color: #666; font-size: 0.9em;">5%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALERTS -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 15px; border-left: 4px solid #ff9800;">
+                    <strong style="color: #ff6b00;">⚠️ ભારે વરસાદ અલર્ટ</strong>
+                    <p style="color: #666; margin-top: 8px; font-size: 0.95em;">બુધવાર 58mm વરસાદ અપેક્ષિત છે</p>
+                </div>
+                <div style="background: #d4edda; border: 2px solid #28a745; border-radius: 10px; padding: 15px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #155724;">✓ વાવણી માટે આદર્શ</strong>
+                    <p style="color: #666; margin-top: 8px; font-size: 0.95em;">જમીનમાં પૂરતો ભેજ છે</p>
+                </div>
+            </div>
+
+            <!-- DISTRICT-WISE MONSOON DATA -->
+            <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 20px; border: 2px solid #ecf0f1;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #3498db; padding-bottom: 10px;">🌧️ જિલ્લા-વાર મોન્સુન ડેટા</h3>
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.95em;">
+                    <thead>
+                        <tr style="background: #ecf0f1;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #bdc3c7;">જિલ્લો</th>
+                            <th style="padding: 12px; text-align: center; border-bottom: 2px solid #bdc3c7;">આ વર્ષે (mm)</th>
+                            <th style="padding: 12px; text-align: center; border-bottom: 2px solid #bdc3c7;">Normal (mm)</th>
+                            <th style="padding: 12px; text-align: center; border-bottom: 2px solid #bdc3c7;">તફાવત %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #ecf0f1;">સુરત</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">847</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">734</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1; color: #27ae60; font-weight: bold;">+15%</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 12px; border-bottom: 1px solid #ecf0f1;">અમદાવાદ</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">625</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">580</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1; color: #27ae60; font-weight: bold;">+8%</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #ecf0f1;">રાજકોટ</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">532</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">512</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1; color: #27ae60; font-weight: bold;">+4%</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 12px; border-bottom: 1px solid #ecf0f1;">વડોદરા</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">756</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">680</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1; color: #27ae60; font-weight: bold;">+11%</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #ecf0f1;">ભાવનગર</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">892</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1;">798</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid #ecf0f1; color: #27ae60; font-weight: bold;">+12%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- RAINFALL IMPACT -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px; padding: 20px;">
+                <h3 style="margin-bottom: 15px;">🌾 ખેતી પર વરસાદનો પ્રભાવ</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px;">
+                        <strong>✓ ફાયદા:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                            <li>જમીનમાં પર્યાપ્ત ભેજ</li>
+                            <li>ફસલ વધવાનું યોગ્ય</li>
+                            <li>બોરવેલ પર દબાણ ઓછો</li>
+                            <li>સ્ટાંગ પાણી અથડાણ</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px;">
+                        <strong>⚠️ સાવધતા:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                            <li>ભારે વરસાદ માટે તૈયાર રહો</li>
+                            <li>જલભરાણથી બચાવ</li>
+                            <li>નીણાણો સુધારો</li>
+                            <li>જંતુ નિયંત્રણ કરો</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. SCHEMES SECTION -->
+        <div id="schemes" class="content-section">
+            <h2 class="section-title">🏛️ સરકારી યોજનાઓ</h2>
+            
+            <div class="scheme-card">
+                <h4>💰 PM-KISAN યોજના</h4>
+                <p>₹6,000 વાર્ષિક (₹2,000 × 3 બાર)</p>
+                <p>લાયકાત: 2 હેક્ટર જમીન સુધી</p>
+            </div>
+
+            <div class="scheme-card">
+                <h4>🌾 ફસલ વીમો યોજના</h4>
+                <p>પાક નુકસાનનો વીમો</p>
+                <p>ખરીફ: 2% | રબી: 1.5%</p>
+            </div>
+
+            <div class="scheme-card">
+                <h4>💳 કિસાન ક્રેડિટ કાર્ડ</h4>
+                <p>₹10,000 - ₹5,00,000 લોન</p>
+                <p>7% વ્યાજ દર | 3 સાલ માટે</p>
+            </div>
+
+            <div class="scheme-card">
+                <h4>🌍 જમીન આરોગ્ય કાર્ડ</h4>
+                <p>જમીનનું મુક્ત પરીક્ષણ</p>
+                <p>ખાતર સુઝાવ અને નિવેદન</p>
+            </div>
+
+            <div class="scheme-card">
+                <h4>🌿 પરંપરાગત કૃષિ વિકાસ</h4>
+                <p>₹20,000 પ્રતિ હેક્ટર × 3 વર્ષ</p>
+                <p>ઓર્ગેનિક ખેતી માટે</p>
+            </div>
+        </div>
+
+        <!-- 3. BUDGET CALCULATOR SECTION -->
+        <div id="budget" class="content-section">
+            <h2 class="section-title">💰 બજટ કેલ્કુલેટર</h2>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                <div class="two-col" style="gap: 10px;">
+                    <div class="form-group">
+                        <label>પાક પસંદ કરો:</label>
+                        <select id="budgetCrop">
+                            <option value="">-- પસંદ કરો --</option>
+                            <option value="cotton">કપાસ</option>
+                            <option value="bajri">બાજરી</option>
+                            <option value="groundnut">મગફળી</option>
+                            <option value="wheat">ઘઉં</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>જમીન (એકર):</label>
+                        <input type="number" id="budgetLand" placeholder="દા.ત. 5">
+                    </div>
+                </div>
+                <button class="btn-submit" onclick="calculateBudget()">📊 કેલ્કુલેટ કરો</button>
+            </div>
+
+            <div id="budgetResult" style="display: none;">
+                <div class="two-col">
+                    <div style="background: #d4edda; padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="color: #666;">કુલ ખર્ચ</div>
+                        <div id="totalCost" style="font-size: 1.8em; font-weight: bold; color: #27ae60;">₹0</div>
+                    </div>
+                    <div style="background: #d4edda; padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="color: #666;">અપેક્ષિત આવક</div>
+                        <div id="expectedIncome" style="font-size: 1.8em; font-weight: bold; color: #27ae60;">₹0</div>
+                    </div>
+                </div>
+                <div style="background: #c8e6c9; padding: 15px; border-radius: 8px; margin-top: 10px; text-align: center;">
+                    <div style="color: #666;">અપેક્ષિત નફો</div>
+                    <div id="profit" style="font-size: 2em; font-weight: bold; color: #155724;">₹0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. CONTACT SECTION -->
+        <div id="contact" class="content-section">
+            <h2 class="section-title">🤝 ખેડૂત-મજુર સંપર્ક</h2>
+            
+            <div id="contactSuccess" class="success-msg">✅ સાચવાયું!</div>
+
+            <div class="two-col">
+                <div>
+                    <h3 style="color: #2ecc71; margin-bottom: 12px;">ખેડૂત નોંધણી</h3>
+                    <form id="farmerForm">
+                        <div class="form-group">
+                            <label>નામ:</label>
+                            <input type="text" id="farmerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>મોબાઇલ:</label>
+                            <input type="tel" id="farmerPhone" pattern="[0-9]{10}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>ગામ/શહેર:</label>
+                            <input type="text" id="farmerLocation" required>
+                        </div>
+                        <div class="form-group">
+                            <label>જમીન (એકર):</label>
+                            <input type="number" id="farmerLand" required>
+                        </div>
+                        <div class="form-group">
+                            <label>પાક:</label>
+                            <input type="text" id="farmerCrop" required>
+                        </div>
+                        <button type="submit" class="btn-submit">નોંધણી કરો</button>
+                    </form>
+                </div>
+
+                <div>
+                    <h3 style="color: #3498db; margin-bottom: 12px;">મજુર નોંધણી</h3>
+                    <form id="laborForm">
+                        <div class="form-group">
+                            <label>નામ:</label>
+                            <input type="text" id="laborName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>મોબાઇલ:</label>
+                            <input type="tel" id="laborPhone" pattern="[0-9]{10}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>ગામ/શહેર:</label>
+                            <input type="text" id="laborLocation" required>
+                        </div>
+                        <div class="form-group">
+                            <label>કામ:</label>
+                            <select id="laborType" required>
+                                <option value="">પસંદ કરો</option>
+                                <option value="વાવણી">વાવણી</option>
+                                <option value="કાપણી">કાપણી</option>
+                                <option value="છંટણી">છંટણી</option>
+                                <option value="ટ્રેક્ટર">ટ્રેક્ટર ઓપરેટર</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>દૈનિક મજૂરી (રૂ.):</label>
+                            <input type="number" id="laborWage" required>
+                        </div>
+                        <button type="submit" class="btn-submit">નોંધણી કરો</button>
+                    </form>
+                </div>
+            </div>
+
+            <h3 style="color: #2c3e50; margin-top: 20px; margin-bottom: 10px;">📍 ખેડૂતો</h3>
+            <div id="farmersList" class="contact-grid"></div>
+
+            <h3 style="color: #2c3e50; margin-top: 20px; margin-bottom: 10px;">👷 મજુરો</h3>
+            <div id="laborsList" class="contact-grid"></div>
+        </div>
+
+        <!-- 5. MARKETPLACE SECTION -->
+        <div id="market" class="content-section">
+            <h2 class="section-title">🛒 માર્કેટપ્લેસ</h2>
+            
+            <div id="marketSuccess" class="success-msg">✅ જાહેરાત પોસ્ટ થઈ!</div>
+
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <h3 style="color: #2ecc71; margin-bottom: 10px;">નવી જાહેરાત</h3>
+                <form id="marketForm">
+                    <div class="two-col" style="gap: 10px;">
+                        <div class="form-group">
+                            <label>પ્રકાર:</label>
+                            <select id="adType" required>
+                                <option value="">પસંદ કરો</option>
+                                <option value="વેચાણ">વેચાણ</option>
+                                <option value="ખરીદી">ખરીદી</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>વસ્તુ:</label>
+                            <input type="text" id="itemName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>કિંમત (રૂ.):</label>
+                            <input type="number" id="itemPrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label>તમારું નામ:</label>
+                            <input type="text" id="sellerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>મોબાઇલ:</label>
+                            <input type="tel" id="sellerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>સ્થળ:</label>
+                            <input type="text" id="itemLocation" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>વિગત:</label>
+                        <textarea id="itemDesc" style="min-height: 80px;" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">જાહેરાત પોસ્ટ કરો</button>
+                </form>
+            </div>
+
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">જાહેરાતો</h3>
+            <div id="marketList"></div>
+        </div>
+
+        <!-- 6. NEWS SECTION -->
+        <div id="news" class="content-section">
+            <h2 class="section-title">📰 ખેતી સમાચાર</h2>
+            
+            <div class="news-item">
+                <div style="color: #666; font-size: 0.9em; margin-bottom: 5px;">📅 25 મે 2026</div>
+                <div class="news-title">કપાસના ભાવમાં વધારો</div>
+                <p style="color: #666;">સરકારે MSP ₹6,620 પ્રતિ ક્વિંટલ કર્યો</p>
+            </div>
+
+            <div class="news-item">
+                <div style="color: #666; font-size: 0.9em; margin-bottom: 5px;">📅 24 મે 2026</div>
+                <div class="news-title">મોન્સુન આગાહી</div>
+                <p style="color: #666;">23% વધારે વરસાદ અપેક્ષિત છે</p>
+            </div>
+
+            <div class="news-item">
+                <div style="color: #666; font-size: 0.9em; margin-bottom: 5px;">📅 23 મે 2026</div>
+                <div class="news-title">PM-KISAN માં વધારો</div>
+                <p style="color: #666;">વધુ ખેડૂતો લાભ લઈ શકશે</p>
+            </div>
+        </div>
+
+        <!-- 7. FERTILIZER SHOPS SECTION -->
+        <div id="shops" class="content-section">
+            <h2 class="section-title">🏪 ખાતર દુકાનો</h2>
+            
+            <div class="card">
+                <h3>જય અમ્બે એગ્રો સેન્ટર</h3>
+                <div class="info">📍 નારોલ, અમદાવાદ</div>
+                <div class="info">📞 9876543210</div>
+                <div class="info">⏰ 8:00 AM - 8:00 PM</div>
+                <div class="info">✅ DAP, યુરિયા, NPK, જૈવિક ખાતર</div>
+                <span class="badge">બધું ઉપલબ્ધ</span>
+            </div>
+
+            <div class="card">
+                <h3>શ્રી કૃષ્ણ ફર્ટિલાઇઝર</h3>
+                <div class="info">📍 કાદોદરા, સુરત</div>
+                <div class="info">📞 9825123456</div>
+                <div class="info">⏰ 7:00 AM - 9:00 PM</div>
+                <div class="info">✅ તમામ પ્રકારના ખાતર</div>
+                <span class="badge">બધું ઉપલબ્ધ</span>
+            </div>
+
+            <div class="card">
+                <h3>મહાદેવ એગ્રી સ્ટોર</h3>
+                <div class="info">📍 કાલાવડ રોડ, રાજકોટ</div>
+                <div class="info">📞 9898765432</div>
+                <div class="info">⏰ 8:30 AM - 7:30 PM</div>
+                <div class="info">✅ યુરિયા, DAP, MOP, માઇક્રો</div>
+                <span class="badge">બધું ઉપલબ્ધ</span>
+            </div>
+        </div>
+
+        <!-- 8. MARKET PRICES SECTION -->
+        <div id="prices" class="content-section">
+            <h2 class="section-title">💵 આજના બજાર ભાવ</h2>
+            
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>પાક</th>
+                        <th>ન્યૂનતમ (₹/ક્વિ.)</th>
+                        <th>મહત્તમ (₹/ક્વિ.)</th>
+                        <th>આજનો ભાવ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🌾 ઘઉં</td>
+                        <td>2,100</td>
+                        <td>2,350</td>
+                        <td><strong>2,225</strong></td>
+                    </tr>
+                    <tr>
+                        <td>🌾 બાજરી</td>
+                        <td>2,050</td>
+                        <td>2,280</td>
+                        <td><strong>2,165</strong></td>
+                    </tr>
+                    <tr>
+                        <td>☁️ કપાસ</td>
+                        <td>6,400</td>
+                        <td>6,850</td>
+                        <td><strong>6,625</strong></td>
+                    </tr>
+                    <tr>
+                        <td>🥜 મગફળી</td>
+                        <td>5,200</td>
+                        <td>5,850</td>
+                        <td><strong>5,525</strong></td>
+                    </tr>
+                    <tr>
+                        <td>🫘 તુવેર</td>
+                        <td>6,800</td>
+                        <td>7,200</td>
+                        <td><strong>7,000</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ===== AUTHENTICATION SYSTEM =====
+        const USERS_KEY = 'farmerPortalUsers';
+        const SESSION_KEY = 'farmerPortalSession';
+
+        function getUsersFromStorage() {
+            const users = localStorage.getItem(USERS_KEY);
+            return users ? JSON.parse(users) : {};
+        }
+
+        function saveUsersToStorage(users) {
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+        }
+
+        function setSession(username) {
+            localStorage.setItem(SESSION_KEY, username);
+        }
+
+        function getSession() {
+            return localStorage.getItem(SESSION_KEY);
+        }
+
+        function logout() {
+            localStorage.removeItem(SESSION_KEY);
+            location.reload();
+        }
+
+        // ===== LOGIN =====
+        document.getElementById('userLogin').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const users = getUsersFromStorage();
+
+            if (users[username] && users[username] === password) {
+                setSession(username);
+                showMainWebsite();
+                document.getElementById('loginError').style.display = 'none';
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+                document.getElementById('loginError').textContent = '❌ Username અથવા Password ખોટો છે!';
+            }
+        });
+
+        // ===== SIGNUP =====
+        document.getElementById('userSignup').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            const users = getUsersFromStorage();
+
+            if (password !== confirm) {
+                alert('❌ Password match નથી કરતા!');
+                return;
+            }
+
+            if (users[username]) {
+                alert('❌ આ username પહલેથી છે!');
+                return;
+            }
+
+            users[username] = password;
+            saveUsersToStorage(users);
+            document.getElementById('signupSuccess').style.display = 'block';
+            document.getElementById('signupSuccess').textContent = '✅ Register સફળ! હવે Login કરો';
+            setTimeout(() => {
+                toggleSignup();
+                document.getElementById('signupSuccess').style.display = 'none';
+            }, 2000);
+        });
+
+        function toggleSignup() {
+            document.getElementById('loginForm').style.display = 
+                document.getElementById('loginForm').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('signupForm').style.display = 
+                document.getElementById('signupForm').style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showMainWebsite() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            document.querySelector('.logout-btn').style.display = 'block';
+        }
+
+        // ===== CHECK SESSION ON LOAD =====
+        window.addEventListener('load', () => {
+            const session = getSession();
+            if (session) {
+                showMainWebsite();
+            } else {
+                document.getElementById('mainContent').style.display = 'none';
+            }
+        });
+
+        // ===== EXISTING DATA SYSTEM =====
+        const DATA = {
+            farmers: [],
+            laborers: [],
+            marketplace: []
+        };
+
+        function saveData() {
+            localStorage.setItem('farmerData', JSON.stringify(DATA));
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem('farmerData');
+            if (saved) {
+                Object.assign(DATA, JSON.parse(saved));
+            }
+        }
+
+        // ===== UI =====
+        function showSection(id) {
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function showMsg(id) {
+            const el = document.getElementById(id);
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 2000);
+        }
+
+        // ===== WEATHER FUNCTION =====
+        function updateWeather() {
+            const weatherData = {
+                surat: { 
+                    temp: '32°C', 
+                    desc: '☁️ વાદળછાયું',
+                    humidity: '68', 
+                    wind: '15',
+                    monsoon: '847 mm',
+                    normal: '734 mm'
+                },
+                ahmedabad: { 
+                    temp: '35°C', 
+                    desc: '☀️맑은 આકાશ',
+                    humidity: '45', 
+                    wind: '12',
+                    monsoon: '625 mm',
+                    normal: '580 mm'
+                },
+                rajkot: { 
+                    temp: '33°C', 
+                    desc: '⛅ આંશિક વાદળ',
+                    humidity: '72', 
+                    wind: '18',
+                    monsoon: '532 mm',
+                    normal: '512 mm'
+                },
+                vadodara: { 
+                    temp: '31°C', 
+                    desc: '🌧️ હલ્કો વરસાદ',
+                    humidity: '80', 
+                    wind: '20',
+                    monsoon: '756 mm',
+                    normal: '680 mm'
+                },
+                bhavnagar: { 
+                    temp: '29°C', 
+                    desc: '🌧️ વરસાદ',
+                    humidity: '85', 
+                    wind: '22',
+                    monsoon: '892 mm',
+                    normal: '798 mm'
+                },
+                jamnagar: { 
+                    temp: '30°C', 
+                    desc: '⛈️ જોરદાર વરસાદ',
+                    humidity: '88', 
+                    wind: '25',
+                    monsoon: '756 mm',
+                    normal: '720 mm'
+                },
+                anand: { 
+                    temp: '31°C', 
+                    desc: '☁️ વાદળછાયું',
+                    humidity: '70', 
+                    wind: '16',
+                    monsoon: '823 mm',
+                    normal: '745 mm'
+                }
+            };
+            
+            const loc = document.getElementById('weatherLocation').value;
+            const w = weatherData[loc] || weatherData.surat;
+            
+            document.getElementById('tempDisplay').textContent = w.temp;
+            document.getElementById('weatherDesc').textContent = w.desc;
+            document.getElementById('humidityDisplay').textContent = '💧 ભેજ: ' + w.humidity + '%';
+            document.getElementById('windDisplay').textContent = '💨 પવન: ' + w.wind + ' km/h';
+        }
+
+        // ===== BUDGET =====
+        function calculateBudget() {
+            const crop = document.getElementById('budgetCrop').value;
+            const land = parseFloat(document.getElementById('budgetLand').value) || 0;
+
+            if (!crop || land === 0) {
+                alert('પાક અને જમીન ભરો');
+                return;
+            }
+
+            const costs = {
+                cotton: 45000,
+                bajri: 22000,
+                groundnut: 55000,
+                wheat: 35000
+            };
+
+            const costPerAcre = costs[crop] || 0;
+            const totalCost = costPerAcre * land;
+            const expectedIncome = totalCost * 1.5;
+            const profit = expectedIncome - totalCost;
+
+            document.getElementById('budgetResult').style.display = 'block';
+            document.getElementById('totalCost').textContent = '₹' + totalCost.toLocaleString('en-IN');
+            document.getElementById('expectedIncome').textContent = '₹' + expectedIncome.toLocaleString('en-IN');
+            document.getElementById('profit').textContent = '₹' + profit.toLocaleString('en-IN');
+        }
+
+        // ===== FARMER =====
+        document.getElementById('farmerForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            DATA.farmers.unshift({
+                id: Date.now(),
+                name: document.getElementById('farmerName').value,
+                phone: document.getElementById('farmerPhone').value,
+                location: document.getElementById('farmerLocation').value,
+                land: document.getElementById('farmerLand').value,
+                crop: document.getElementById('farmerCrop').value
+            });
+            saveData();
+            showMsg('contactSuccess');
+            e.target.reset();
+            displayFarmers();
+        });
+
+        function displayFarmers() {
+            const list = document.getElementById('farmersList');
+            if (DATA.farmers.length === 0) {
+                list.innerHTML = '<div class="empty">હજી કોણ નોંધાયો નથી</div>';
+                return;
+            }
+            list.innerHTML = DATA.farmers.map(f => `
+                <div class="card">
+                    <h3>🌾 ${f.name}</h3>
+                    <div class="info">📞 ${f.phone}</div>
+                    <div class="info">📍 ${f.location}</div>
+                    <div class="info">🚜 ${f.land} એકર | 🌱 ${f.crop}</div>
+                    <span class="badge">ખેડૂત</span>
+                    <button class="delete-btn" onclick="deleteFarmer(${f.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteFarmer(id) {
+            DATA.farmers = DATA.farmers.filter(f => f.id !== id);
+            saveData();
+            displayFarmers();
+        }
+
+        // ===== LABOR =====
+        document.getElementById('laborForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            DATA.laborers.unshift({
+                id: Date.now(),
+                name: document.getElementById('laborName').value,
+                phone: document.getElementById('laborPhone').value,
+                location: document.getElementById('laborLocation').value,
+                type: document.getElementById('laborType').value,
+                wage: document.getElementById('laborWage').value
+            });
+            saveData();
+            showMsg('contactSuccess');
+            e.target.reset();
+            displayLaborers();
+        });
+
+        function displayLaborers() {
+            const list = document.getElementById('laborsList');
+            if (DATA.laborers.length === 0) {
+                list.innerHTML = '<div class="empty">હજી કોણ નોંધાયો નથી</div>';
+                return;
+            }
+            list.innerHTML = DATA.laborers.map(l => `
+                <div class="card">
+                    <h3>👷 ${l.name}</h3>
+                    <div class="info">📞 ${l.phone}</div>
+                    <div class="info">📍 ${l.location}</div>
+                    <div class="info">💼 ${l.type}</div>
+                    <div class="info">💰 ₹${l.wage}/દિવસ</div>
+                    <span class="badge">મજુર</span>
+                    <button class="delete-btn" onclick="deleteLabor(${l.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteLabor(id) {
+            DATA.laborers = DATA.laborers.filter(l => l.id !== id);
+            saveData();
+            displayLaborers();
+        }
+
+        // ===== MARKETPLACE =====
+        document.getElementById('marketForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            DATA.marketplace.unshift({
+                id: Date.now(),
+                type: document.getElementById('adType').value,
+                item: document.getElementById('itemName').value,
+                price: document.getElementById('itemPrice').value,
+                seller: document.getElementById('sellerName').value,
+                phone: document.getElementById('sellerPhone').value,
+                location: document.getElementById('itemLocation').value,
+                desc: document.getElementById('itemDesc').value
+            });
+            saveData();
+            showMsg('marketSuccess');
+            e.target.reset();
+            displayMarket();
+        });
+
+        function displayMarket() {
+            const list = document.getElementById('marketList');
+            if (DATA.marketplace.length === 0) {
+                list.innerHTML = '<div class="empty">જાહેરાત નથી</div>';
+                return;
+            }
+            list.innerHTML = DATA.marketplace.map(m => `
+                <div class="card">
+                    <h3>${m.item}</h3>
+                    <span class="badge">${m.type}</span>
+                    <div class="info">${m.desc}</div>
+                    <div class="info">👤 ${m.seller} | 📞 ${m.phone} | 📍 ${m.location}</div>
+                    <div style="margin-top: 10px; font-weight: bold; color: #27ae60;">₹${m.price}</div>
+                    <button class="delete-btn" onclick="deleteMarket(${m.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteMarket(id) {
+            DATA.marketplace = DATA.marketplace.filter(m => m.id !== id);
+            saveData();
+            displayMarket();
+        }
+
+        // ===== INIT =====
+        loadData();
+        displayFarmers();
+        displayLaborers();
+        displayMarket();
+
+        // ===== DOWNLOAD FUNCTION =====
+    </script>
+</body>
+</html>
